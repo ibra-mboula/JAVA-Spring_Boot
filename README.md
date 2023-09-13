@@ -11,6 +11,8 @@ Main Features:
 
 - Relational Database: We have an external database (MySQL) with at least 3 tables. One of these tables connects the main tables together.
 
+- Bootstrap for Front-End: The user interface is designed using Bootstrap, ensuring a responsive and modern look.
+  
 - CRUD Operations: The app lets you Create, Read, Update, and Delete (CRUD) data.
 
 - DAO & JPA Design Pattern: For keeping data, the project uses JPA.

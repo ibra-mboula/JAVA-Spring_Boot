@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>WANO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+</head>
+<body>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">WANO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="http://localhost:8080/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/home/poisson">Poisson</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/home/MesDemandes">Mes Demandes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/control">Control Panel</a>
+                </li>
+
+                <li class="nav-item">
+                    <button class="btn btn-outline-success" type="submit">user: <span th:text="${user.username}"> </span></button>
+                </li>
+
+
+                <li class="nav-item">
+                    <form action="/logout" method="post">
+                        <button type="submit" class="btn btn-danger">Déconnexion</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<hr>
+
+<!-- ****************************************************************************************************** -->
+
+
+
+
+<!-- Tous les utilisateurs du inscrit -->
+<div class="users-container" >
+
+    <div class="d-flex justify-content-center align-items-center mt-3">
+        <h4>All Users</h4>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom d'utilisateur</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- vu que j'ai ajouté tous mes user au modèle je les récupère ici pour les afficher -->
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td>
+                <form action="/control/delete-user" method="post">
+                    <input type="hidden" name="id" th:value="${user.id}">
+                    <button type="submit" class="btn btn-warning">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+<!-- ****************************************************************************************************** -->
+
+
+
+
+
+
+<!-- ajout d'un nouveau poisson -->
+
+<div class="adoptions-container" >
+
+    <div class="d-flex justify-content-center align-items-center mt-3">
+        <h4>Fish upload</h4>
+    </div>
+
+    <form action="#" th:action="@{/uploadFish}" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="fishName" class="form-label">Nom du poisson</label>
+            <input class="form-control custom-input" type="text" id="fishName" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="fishDescription" class="form-label">Description du poisson</label>
+            <textarea class="form-control custom-input" id="fishDescription" name="description" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="fishImage" class="form-label">Image du poisson</label>
+            <!--  a ce niveau j'utilise un type file pour telecharger une image -->
+            <input class="form-control custom-input" type="file" id="fishImage" name="image" required>
+        </div>
+        <input type="submit" class="btn btn-info" value="Upload Fish Image">
+    </form>
+
+</div>
+
+
+
+
+
+<!-- ****************************************************************************************************** -->
+
+
+
+
+<!-- Affichage de liste des poissons -->
+
+
+    <div class="d-flex justify-content-center align-items-center mt-3" ><h4>All Fishes</h4></div>
+<div class="table-responsive adoptions-container" >
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="fish : ${fishes}">
+            <td th:text="${fish.name}"></td>
+            <td th:text="${fish.description}"></td>
+            <td>
+                <img th:src="@{${imagesBasePath} + ${fish.imageName}}" class="img-thumbnail" alt="Fish image" style="width: 100px;">
+            </td>
+            <td>
+
+
+                <form action="#" th:action="@{/fish/edit/{id}(id=${fish.id})}" method="post">
+                    <input type="hidden" name="_method" value="put" />
+                    <div class="mb-3">
+                        <label for="fishName" class="form-label">Nom du poisson</label>
+                        <input class="form-control custom-input" type="text" id="fishNameEdit" name="name" th:value="${fish.name}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fishDescription" class="form-label">Description du poisson</label>
+                        <textarea class="form-control custom-input" id="fishDescriptionEdit" name="description" th:value="${fish.description}" required></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Update Fish">
+                </form>
+
+                <form method="POST" th:action="@{/fish/delete/{id}(id=${fish.id})}">
+                    <button type="submit" class="btn btn-warning btn-sm">Supprimer</button>
+                </form>
+
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<!-- ****************************************************************************************************** -->
+
+
+
+
+<!-- Demande des user -->
+<div class="adoptions-container">
+    <div class="d-flex justify-content-center align-items-center mt-3">
+        <h4>Demandes d'adoptions</h4>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Nom du poisson</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Adresse</th>
+            <th>Email</th>
+            <th>Motivation</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="adoptionRequest : ${adoptionRequests}">
+            <td><input type="checkbox" id="adoptionCheck${adoptionRequest.id}" name="adoptionCheck" th:value="${adoptionRequest.id}"></td>
+            <td th:text="${adoptionRequest.id}"></td>
+            <td th:text="${adoptionRequest.username}"></td>
+            <td th:text="${adoptionRequest.fishName}"></td>
+            <td th:text="${adoptionRequest.nom}"></td>
+            <td th:text="${adoptionRequest.prenom}"></td>
+            <td th:text="${adoptionRequest.adresse}"></td>
+            <td th:text="${adoptionRequest.email}"></td>
+            <td th:text="${adoptionRequest.motivation}"></td>
+            <td>
+                <form method="POST" th:action="@{/adoptionRequests/delete/{id}(id=${adoptionRequest.id})}">
+                    <button type="submit" class="btn btn-warning btn-sm">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<!-- ****************************************************************************************************** -->
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</body>
+</html>

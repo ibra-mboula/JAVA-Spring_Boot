@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>WANO</title>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Liens de navigation -->
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="http://localhost:8080/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:8080/home/poisson">Poisson</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:8080/home">Mes Demandes</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:8080/control">Control Panel</a>
+        </li>
+
+        <li class="nav-item">
+          <form action="/logout" method="post">
+            <button type="submit" class="btn btn-danger">Déconnexion</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<h1>Inscription</h1>
+
+<!-- j'utilise th:object pour lier le formulaire à l'objet user du modèle -->
+
+<form action="#" th:action="@{/inscription}" th:object="${user}" method="post">
+  <label for="username">Nom d'utilisateur:</label>
+  <!-- th:field="*{username} avec ca je lie la saisi à l'attribut username-->
+  <input type="text" id="username" th:field="*{username}" required>
+  <br>
+  <label for="password">Mot de passe:</label>
+  <!-- th:field="*{username} avec ca je lie la saisi à l'attribut password-->
+  <input type="password" id="password" th:field="*{password}" required>
+  <br>
+  <label for="isAdmin">Admin:</label>
+  <input type="checkbox" id="isAdmin" th:field="*{isAdmin}">
+  <br>
+  <input type="submit" value="S'inscrire">
+</form>
+<a href="/connexion">Se connecter</a>
+</body>
+</html>

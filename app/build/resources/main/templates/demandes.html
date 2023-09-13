@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>WANO</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">WANO</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="http://localhost:8080/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:8080/home/poisson">Poisson</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:8080/home/MesDemandes">Mes Demandes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:8080/control">Control Panel</a>
+        </li>
+
+        <li class="nav-item">
+          <button class="btn btn-outline-success" type="submit">user: <span th:text="${user.username}"> </span></button>
+        </li>
+
+
+        <li class="nav-item">
+          <form action="/logout" method="post">
+            <button type="submit" class="btn btn-danger">Déconnexion</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<!-- ************************************************************************ -->
+
+
+
+<h1>Mes demandes d'adoption</h1>
+
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Adresse</th>
+    <th>Email</th>
+    <th>Motivation</th>
+  </tr>
+  </thead>
+  <tbody>
+  <th:block th:each="adoptionRequest : ${adoptionRequests}">
+    <tr>
+      <td th:text="${adoptionRequest.id}"></td>
+      <td th:text="${adoptionRequest.nom}"></td>
+      <td th:text="${adoptionRequest.prenom}"></td>
+      <td th:text="${adoptionRequest.adresse}"></td>
+      <td th:text="${adoptionRequest.email}"></td>
+      <td th:text="${adoptionRequest.motivation}"></td>
+    </tr>
+  </th:block>
+  </tbody>
+</table>
+
+
+</body>
+
+
+</body>
+</html>

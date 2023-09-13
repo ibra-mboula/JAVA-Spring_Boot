@@ -5,21 +5,21 @@ This project is a Web Client/Server application developed in Java based on a 3-t
 Main Features:
 ----------
 
-- Strict MVC Architecture: This project follows a strict Model-View-Controller setup, making sure there's a clear divide between the business logic, user interface, and data management.
+- *Strict MVC Architecture:* This project follows a strict Model-View-Controller setup, making sure there's a clear divide between the business logic, user interface, and data management.
 
-- Spring Framework: We use the Spring Framework to make development easier.
+- *Spring Framework:* We use the Spring Framework to make development easier.
 
-- Relational Database: We have an external database (MySQL) with at least 3 tables. One of these tables connects the main tables together.
+- *Relational Database:* We have an external database (MySQL) with at least 3 tables. One of these tables connects the main tables together.
 
-- Bootstrap for Front-End: The user interface is designed using Bootstrap, ensuring a responsive and modern look.
+- *Bootstrap for Front-End:* The user interface is designed using Bootstrap, ensuring a responsive and modern look.
   
-- CRUD Operations: The app lets you Create, Read, Update, and Delete (CRUD) data.
+- *CRUD Operations:* The app lets you Create, Read, Update, and Delete (CRUD) data.
 
-- DAO & JPA Design Pattern: For keeping data, the project uses JPA.
+- *DAO & JPA Design Pattern:* For keeping data, the project uses JPA.
 
-- Views: There are at least four different screens or views, with a focus on dynamic views to make the user experience better.
+- *Views:* There are at least four different screens or views, with a focus on dynamic views to make the user experience better.
 
-- Session Tracking: The app tracks user sessions closely and stores important session info in the database.
+- *Session Tracking:* The app tracks user sessions closely and stores important session info in the database.
 
 Output:
 --------
@@ -37,5 +37,5 @@ Output:
 ![Capture d'écran 2023-09-14 014145](https://github.com/ibra-mboula/JAVA-Spring_Boot/assets/78673312/df85b5df-8540-44c7-87d0-f3dc6f0c06ae)
 
 - You can see that passwords are encrypted with salt
-- 
+
 ![Capture d'écran 2023-09-14 014939](https://github.com/ibra-mboula/JAVA-Spring_Boot/assets/78673312/adc8055f-06a2-4a73-aa19-b7959de9f5fc)

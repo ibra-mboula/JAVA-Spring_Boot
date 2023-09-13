@@ -1,4 +1,4 @@
-# JAVA-Spring_Boot
+# JAVA-Spring_Boot (IDE : IntelliJ )
 
 This project is a Web Client/Server application developed in Java based on a 3-tier architecture, including the Client, Web Server, and a Database.
 
